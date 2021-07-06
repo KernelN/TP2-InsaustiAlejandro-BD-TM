@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title></title>
-</head>
-<body>
-
 	<?php 
-
-
 	//connection to data base
-	$connection = mysqli_connect("localhost","root","root","tp2-insaustialejandro-bd-tm");
+	$con = mysqli_connect("localhost","root","root","tp2-insaustialejandro-bd-tm");
 
 	if (mysqli_connect_errno()) //if there was an error with the connection
 	{
@@ -23,12 +13,20 @@
 	$password = $_POST["password"];
 
 
-	//get value username from table Player and check if it's equal to the variable username
-	$namecheckquery = "SELECT username FROM Player WHERE username ='" . $username ."';";
+	//get value username from table player and check if it's equal to the variable username
+	$namecheckquery = "SELECT username FROM player WHERE username ='" . $username ."';";
 
-	$namecheck = mysqli_query($connection, $namecheckquery) or die("2: Name Check Failed")
+	$namecheck = mysqli_query($con, $namecheckquery) or die("2: Name Check Failed");
 
+	if(mysqli_num_rows($namecheck) > 0)
+	{
+		echo "3: Name already exists"; //error code #3 name exist cannot register
+		exit();
+	}
+
+	//add user to the table
+		$insertuserquery = "INSERT INTO  player (username, password) VALUES ('".$username."','".$password."');";
+		mysqli_query($con, $insertuserquery) or die("4: Insert player query failed"); //error code # - insert query failed
+
+		echo ("1");
 	 ?>
-
-</body>
-</html>
