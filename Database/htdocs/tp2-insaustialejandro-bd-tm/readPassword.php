@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title></title>
-</head>
-<body>
-
-	<?php 
-
-
+<?php
 	//connection to data base
 	$connection = mysqli_connect("localhost","root","root","tp2-insaustialejandro-bd-tm");
 	if (mysqli_connect_errno()) //if there was an error with the connection
@@ -17,14 +7,11 @@
 		exit();
 	}
 
-
 	//now that connection succeded, create variables
 	$username = $_POST["username"];
-	$password = $_POST["password"];
-
 
 	//get value username from table Player and check if it's equal to the variable username
-	$namecheckquery = "SELECT username FROM player WHERE username ='".$username."';";
+	$namecheckquery = "SELECT username, password FROM player WHERE username ='" . $username ."';";
 	//Check if there was any error with the namecheck above
 	$namecheck = mysqli_query($connection, $namecheckquery) or die("2: Name Check Failed");
 
@@ -35,14 +22,7 @@
 		exit();
 	}
 
-	//update user data in table
-	$updateuserquery = "UPDATE player SET password ='".$password."' WHERE username = '".$username."';";
-	//check if data update was succesful
-	mysqli_query($connection, $updateuserquery) or die("4: Update user query failed");
-
-	echo "1";
-
-	 ?>
-
-</body>
-</html>
+	//get data from name check (string array wich contains the values from the Player table)
+	$existingInfo = mysqli_fetch_assoc($namecheck);
+	echo $existingInfo["password"]; //print values
+ ?> 
