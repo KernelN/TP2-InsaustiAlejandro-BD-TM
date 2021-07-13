@@ -1,6 +1,7 @@
 [System.Serializable]
 public class PlayerData
 {
-    public float score;
-    public float lifes;
+    public int score;
+    public int health;
+    public int deaths;
 }

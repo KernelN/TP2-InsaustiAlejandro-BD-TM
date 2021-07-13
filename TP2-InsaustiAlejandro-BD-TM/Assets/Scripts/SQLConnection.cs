@@ -11,6 +11,7 @@ public class SQLConnection : MonoBehaviour
     [SerializeField] GameObject passwordError;
     [SerializeField] GameObject registerPanel;
     [SerializeField] RectTransform signPanel;
+    [SerializeField] PlayerController playerController;
     [SerializeField] float hidePanelTime;
     const string dataBasePath = "http://localhost/tp2-insaustialejandro-bd-tm/";
     const string nameUnexistantError = "3: Name Unexistant";
@@ -36,6 +37,7 @@ public class SQLConnection : MonoBehaviour
         registerPanel.SetActive(false);
     }
 
+    //SQL Sign funcs
     IEnumerator Sign()
     {
         //check if user entered a username
@@ -111,6 +113,10 @@ public class SQLConnection : MonoBehaviour
         {
             Debug.Log("Data updated to the sql database succesfully!");
         }
+        else
+        {
+            Debug.Log("Error: " + www.error);
+        }
     }
     IEnumerator ReadUser()
     {
@@ -136,6 +142,7 @@ public class SQLConnection : MonoBehaviour
             Debug.Log("Error: " + www.error);
         }
     }
+    //Unity Sign funcs
     IEnumerator FinishSign()
     {
         signSuccessful = true;
@@ -148,5 +155,29 @@ public class SQLConnection : MonoBehaviour
         hidePanelTimer = 0;
         signPanel.gameObject.SetActive(false);
         yield break;
+    }
+
+    //SQL InGame funcs
+    IEnumerator UpdateUserGame(PlayerData playerData)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("username", playerName);
+        form.AddField("score", playerData.score.ToString());
+        form.AddField("deaths", playerData.deaths.ToString());
+        UnityWebRequest www = UnityWebRequest.Post(dataBasePath + "updatePlayerData.php", form);
+        yield return www.SendWebRequest();
+        if (www.result == UnityWebRequest.Result.Success)
+        {
+            Debug.Log("Data updated to the sql database succesfully!");
+        }
+        else
+        {
+            Debug.Log("Error: " + www.error);
+        }
+    }
+    //Unity InGameFuncs
+    public void SavePlayerDataToDatabase()
+    {
+        StartCoroutine(UpdateUserGame(playerController.data));
     }
 }

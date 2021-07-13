@@ -4,7 +4,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float speed;
-    [SerializeField] PlayerData data;
+    //[SerializeField] PlayerData data;
+    public PlayerData data;
     Vector2 move;
 
     private void FixedUpdate()
