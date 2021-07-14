@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class SQLConnection : MonoBehaviour
 {
+    public Action signedIn;
     public bool signSuccessful;
     [SerializeField] TMPro.TMP_InputField usernameField;
     [SerializeField] TMPro.TMP_InputField passwordField;
@@ -154,7 +156,7 @@ public class SQLConnection : MonoBehaviour
         } while (hidePanelTimer <= hidePanelTime);
         hidePanelTimer = 0;
         signPanel.gameObject.SetActive(false);
-        yield break;
+        signedIn?.Invoke();
     }
 
     //SQL InGame funcs
