@@ -9,6 +9,7 @@ public class SQLConnection : MonoBehaviour
     public Action passwordErrorDetected;
     public Action newUserDetected;
     public Action newUserRegistered;
+    public Action passwordChangeDetected;
     public Action signedIn;
     public PlayerData playerData;
     public bool signSuccessful;
@@ -34,6 +35,11 @@ public class SQLConnection : MonoBehaviour
     {
         StartCoroutine(RegisterUser());
         newUserRegistered?.Invoke();
+    }
+    public void CallUpdate()
+    {
+        StartCoroutine(UpdateUser());
+        passwordChangeDetected?.Invoke();
     }
 
     //SQL Sign funcs
@@ -68,8 +74,7 @@ public class SQLConnection : MonoBehaviour
         }
         else //if didn't have pass, update and add one to database
         {
-            StartCoroutine(UpdateUser());
-            FinishSign();
+            passwordChangeDetected();            
             yield break;
         }
     }
@@ -94,7 +99,6 @@ public class SQLConnection : MonoBehaviour
         if (www.result == UnityWebRequest.Result.Success)
         {
             Debug.Log("Data loaded to the sql database succesfully!");
-            FinishSign();
         }
         else
         {
@@ -111,6 +115,7 @@ public class SQLConnection : MonoBehaviour
         if (www.result == UnityWebRequest.Result.Success)
         {
             Debug.Log("Data updated to the sql database succesfully!");
+            FinishSign();
         }
         else
         {

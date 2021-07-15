@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject usernameError;
     [SerializeField] GameObject passwordError;
     [SerializeField] GameObject registerPanel;
+    [SerializeField] GameObject passwordPanel;
     [SerializeField] RectTransform signPanel;
     [SerializeField] SQLConnection sqlConnector;
     [SerializeField] float hidePanelTime;
@@ -31,6 +32,7 @@ public class UIManager : MonoBehaviour
         sqlConnector.passwordErrorDetected += onPasswordError;
         sqlConnector.newUserDetected += onNewUserDetected;
         sqlConnector.newUserRegistered += onNewUserRegistration;
+        sqlConnector.passwordChangeDetected += onPasswordChangeDetected;
         sqlConnector.signedIn += onSuccesfulSignIn;
         gameplayManager.gameStarted += onGameStart;
         gameplayManager.oneSecondPassed += onSecondPass;
@@ -55,6 +57,10 @@ public class UIManager : MonoBehaviour
     void onNewUserRegistration()
     {
         registerPanel.SetActive(false);
+    }
+    void onPasswordChangeDetected()
+    {
+        passwordPanel.SetActive(!passwordPanel.activeSelf);
     }
     void onSuccesfulSignIn()
     {
