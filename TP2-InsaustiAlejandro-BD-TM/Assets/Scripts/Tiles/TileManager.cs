@@ -14,7 +14,7 @@ public class TileManager : MonoBehaviour
     [SerializeField] int tileDisappearCooldown;
     List<TileController> tiles;
     Action UpdateTiles;
-    int tileQuantity { get { return (int)(mapSize.x + mapSize.y); } }
+    int tileQuantity { get { return (int)(mapSize.x * mapSize.y); } }
 
     private void Start()
     {
@@ -65,12 +65,12 @@ public class TileManager : MonoBehaviour
     void SelectTilesToDisappear()
     {
         float tilesPercentage = (float)gameManager.currentTime / (float)gameManager.maxTime;
-        for (int i = 0; i <= (int)(tilesPercentage * tileQuantity); i++)
+        for (int i = 0; i <= (int)(tilesPercentage * tileQuantity) + 1; i++) //round down and add 1
         {
             int randomTileIndex;
             do
             {
-                randomTileIndex = Random.Range(0, tileQuantity);
+                randomTileIndex = Random.Range(0, tileQuantity - 1); //tile quantity - safeTile
             } while (tiles[randomTileIndex].currentState != TileController.State.SOLID);
             tiles[randomTileIndex].StartDisappear();
         }
@@ -79,8 +79,8 @@ public class TileManager : MonoBehaviour
     {
         Vector2 borders = mapSize;
         Transform lastTile = tiles[tiles.Count - 1].transform;
-        borders.x = lastTile.position.x + lastTile.localScale.x / 2;  
-        borders.y = lastTile.position.y + lastTile.localScale.y / 2;  
+        borders.x = lastTile.position.x + lastTile.localScale.x / 2;
+        borders.y = lastTile.position.y + lastTile.localScale.y / 2;
         return borders;
     }
 }
