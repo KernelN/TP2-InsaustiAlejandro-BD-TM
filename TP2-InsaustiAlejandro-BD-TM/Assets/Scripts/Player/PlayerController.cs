@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
             {
                 do
                 {
-                    transform.localPosition = tileManager.GetRandomPosInsideMap();
+                    transform.position = tileManager.GetRandomPosInsideMap();
                 } while (Physics2D.Raycast(transform.localPosition, Vector2.right, 1, LayerMask.GetMask("Map")));
                 GetComponent<BoxCollider2D>().enabled = false;
                 Invoke("ReactivateCollider", 0.5f);

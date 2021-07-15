@@ -4,6 +4,7 @@ public class SavePointController : MonoBehaviour
 {
     [SerializeField] SQLConnection sqlConnector;
     [SerializeField] GameplayManager gameplayManager;
+    [SerializeField] TileManager tileManager;
 
     private void Start()
     {
@@ -20,6 +21,7 @@ public class SavePointController : MonoBehaviour
 
     void OnGameStart()
     {
+        transform.position = tileManager.GetRandomPosInsideMap();
         GetComponent<SpriteRenderer>().enabled = true;
         GetComponent<BoxCollider2D>().enabled = true;
     }
