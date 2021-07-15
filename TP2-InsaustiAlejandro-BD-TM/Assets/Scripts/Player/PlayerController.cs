@@ -33,13 +33,10 @@ public class PlayerController : MonoBehaviour
                 Die(true);
             }
         }
-        //else if (collisionGO.tag == "Coin")
-        //{
-        //    if (collisionGO.GetComponent<TileController>().currentState == TileController.State.INTANGIBLE)
-        //    {
-        //        Die(true);
-        //    }
-        //}
+        else if (collisionGO.tag == "Coin")
+        {
+            collisionGO.GetComponent<CoinController>().PickUp();
+        }
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -53,6 +50,7 @@ public class PlayerController : MonoBehaviour
         {
             data.health = maxHealth;
             data.deaths++;
+            data.score /= 2; 
         }
         if (playerFell)
         {
