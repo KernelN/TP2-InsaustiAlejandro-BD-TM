@@ -2877,7 +2877,7 @@ MonoBehaviour:
     type: 3}
   tilesEmpty: {fileID: 3607446}
   gameManager: {fileID: 868002163}
-  mapSizeSetter: {x: 5, y: 5}
+  mapSizeSetter: {x: 9, y: 9}
   tileDisappearCooldown: 3
 --- !u!4 &973107281
 Transform:
@@ -5693,6 +5693,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584320257539398109, guid: 79a4923930dfe9649b57bf75a0dd4980,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584320257539398109, guid: 79a4923930dfe9649b57bf75a0dd4980,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584320257539398109, guid: 79a4923930dfe9649b57bf75a0dd4980,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4584320257539398109, guid: 79a4923930dfe9649b57bf75a0dd4980,
         type: 3}

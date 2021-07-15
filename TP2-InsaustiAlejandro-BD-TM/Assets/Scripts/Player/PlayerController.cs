@@ -55,6 +55,15 @@ public class PlayerController : MonoBehaviour
             data.deaths++;
             data.score /= 2;
             scoreChanged?.Invoke();
+            if (!playerFell)
+            {
+                do
+                {
+                    transform.localPosition = tileManager.GetRandomPosInsideMap();
+                } while (Physics2D.Raycast(transform.localPosition, Vector2.right, 1, LayerMask.GetMask("Map")));
+                GetComponent<BoxCollider2D>().enabled = false;
+                Invoke("ReactivateCollider", 0.5f);
+            }
         }
         if (playerFell)
         {

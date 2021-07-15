@@ -83,4 +83,9 @@ public class TileManager : MonoBehaviour
         borders.y = lastTile.position.y + lastTile.localScale.y / 2;
         return borders;
     }
+    public Vector2 GetRandomPosInsideMap()
+    {
+        Vector2 border = GetMapBorders();
+        return new Vector2(Random.Range(-border.x, border.x), Random.Range(-border.y, border.y));
+    }
 }

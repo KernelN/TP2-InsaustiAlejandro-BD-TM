@@ -53,8 +53,8 @@ public class CoinManager : MonoBehaviour
     }
     Vector3 GetFreePosition()
     {
-        Vector2 mapBorder = tileManager.GetMapBorders();
-        Vector2 freePos = new Vector2(Random.Range(-mapBorder.x, mapBorder.x), Random.Range(-mapBorder.y, mapBorder.y));
+        Vector2 freePos = tileManager.GetRandomPosInsideMap();
+        return freePos;
         //while (Physics2D.CircleCast(freePos, coinPrefab.transform.localScale.x * 2, Vector2.up, 0, LayerMask.GetMask("Map")))
         //{
         //    if (freePos.x < mapBorder.x)
@@ -70,7 +70,6 @@ public class CoinManager : MonoBehaviour
         //        freePos.x = -mapBorder.x;
         //    }
         //} 
-        return freePos;
     }
     void ChangeCoinStates()
     {
