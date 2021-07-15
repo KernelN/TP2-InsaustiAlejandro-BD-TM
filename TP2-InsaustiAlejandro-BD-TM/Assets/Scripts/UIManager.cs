@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     float hidePanelTimer;
     //InGame
     [SerializeField] GameObject inGameUI;
+    [SerializeField] GameObject gameOver;
     [SerializeField] TMPro.TextMeshProUGUI time;
     [SerializeField] TMPro.TextMeshProUGUI score;
     [SerializeField] TMPro.TextMeshProUGUI deaths;
@@ -33,6 +34,7 @@ public class UIManager : MonoBehaviour
         sqlConnector.signedIn += onSuccesfulSignIn;
         gameplayManager.gameStarted += onGameStart;
         gameplayManager.oneSecondPassed += onSecondPass;
+        gameplayManager.gameEnded += onGameOver;
         player.scoreChanged += onScoreUpdate;
         player.playerDied += onDeathsCounterUpdate;
     }
@@ -87,5 +89,12 @@ public class UIManager : MonoBehaviour
     void onDeathsCounterUpdate()
     {
         deaths.text = player.data.deaths.ToString();
+    }
+    void onGameOver()
+    {
+        gameOver.SetActive(true);
+        int minutesPassed = gameplayManager.maxTime / 60;
+        int secondsPassed = gameplayManager.maxTime % 60;
+        time.text = minutesPassed.ToString("00") + ":" + secondsPassed.ToString("00");
     }
 }
