@@ -14,6 +14,7 @@ public class SQLConnection : MonoBehaviour
     public bool signSuccessful;
     [SerializeField] TMPro.TMP_InputField usernameField;
     [SerializeField] TMPro.TMP_InputField passwordField;
+    [SerializeField] GameplayManager gameplayManager;
     const string dataBasePath = "http://localhost/tp2-insaustialejandro-bd-tm/";
     const string nameUnexistantError = "3: Name Unexistant";
     const string SQLEmpty = " ";
@@ -23,6 +24,7 @@ public class SQLConnection : MonoBehaviour
     private void Start()
     {
         signSuccessful = false;
+        gameplayManager.gameEnded += SavePlayerDataToDatabase;
     }
     public void CallSign()
     {

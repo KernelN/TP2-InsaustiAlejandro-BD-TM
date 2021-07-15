@@ -3645,6 +3645,7 @@ MonoBehaviour:
   signSuccessful: 0
   usernameField: {fileID: 2138243479}
   passwordField: {fileID: 1796493735}
+  gameplayManager: {fileID: 868002163}
 --- !u!4 &1673171512
 Transform:
   m_ObjectHideFlags: 0

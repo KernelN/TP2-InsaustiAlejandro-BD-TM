@@ -7,6 +7,7 @@ public class GameplayManager : MonoBehaviour
     public int maxTime { get { return maxTimeSetterInSeconds; } }
     public Action gameStarted;
     public Action oneSecondPassed;
+    public Action gameEnded;
     [SerializeField] SQLConnection sqlConnector;
     [SerializeField] int maxTimeSetterInSeconds;
     //bool inGame;
@@ -27,6 +28,7 @@ public class GameplayManager : MonoBehaviour
         currentTime += 1;
         if (currentTime >= maxTime)
         {
+            gameEnded?.Invoke();
             CancelInvoke("UpdateStates");
             return;
         }
