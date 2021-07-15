@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         move = context.ReadValue<Vector2>();
     }
-    void Die(bool playerFell)
+    public void Die(bool playerFell)
     {
         data.health--;
         if (data.health <= 0)
@@ -62,5 +62,9 @@ public class PlayerController : MonoBehaviour
     void ReactivateCollider()
     {
         GetComponent<BoxCollider2D>().enabled = true;
+    }
+    public void IncreaseScore(int scoreIncrease)
+    {
+        data.score += scoreIncrease;
     }
 }
