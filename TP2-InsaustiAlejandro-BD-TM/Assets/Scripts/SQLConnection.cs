@@ -169,4 +169,9 @@ public class SQLConnection : MonoBehaviour
     {
         StartCoroutine(UpdateUserGame());
     }
+    public void UpdatePlayerData(PlayerData data)
+    {
+        playerData.deaths = data.deaths;
+        playerData.score = data.score;
+    }
 }
