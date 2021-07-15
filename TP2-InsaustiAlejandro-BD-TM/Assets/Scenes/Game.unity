@@ -307,7 +307,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &208997086
 GameObject:
@@ -1619,7 +1619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sqlConnector: {fileID: 1673171511}
-  maxTimeSetterInSeconds: 120
+  maxTimeSetterInSeconds: 20
 --- !u!4 &868002164
 Transform:
   m_ObjectHideFlags: 0
@@ -1885,7 +1885,7 @@ MonoBehaviour:
     type: 3}
   tilesEmpty: {fileID: 3607446}
   gameManager: {fileID: 868002163}
-  mapSize: {x: 5, y: 5}
+  mapSizeSetter: {x: 5, y: 5}
   tileDisappearCooldown: 3
 --- !u!4 &973107281
 Transform:
@@ -3553,7 +3553,7 @@ PrefabInstance:
     - target: {fileID: 889809567872050877, guid: 05a7da595f25916479e02bdfab6ff55d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 889809567872050877, guid: 05a7da595f25916479e02bdfab6ff55d,
         type: 3}
@@ -3677,10 +3677,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5861024181892263146, guid: 79a4923930dfe9649b57bf75a0dd4980,
+        type: 3}
+      propertyPath: maxHealth
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5861024181892263146, guid: 79a4923930dfe9649b57bf75a0dd4980,
+        type: 3}
+      propertyPath: tileManager
+      value: 
+      objectReference: {fileID: 973107280}
     - target: {fileID: 6393033741622802956, guid: 79a4923930dfe9649b57bf75a0dd4980,
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6690267437887029952, guid: 79a4923930dfe9649b57bf75a0dd4980,
+        type: 3}
+      propertyPath: m_UseFullKinematicContacts
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79a4923930dfe9649b57bf75a0dd4980, type: 3}

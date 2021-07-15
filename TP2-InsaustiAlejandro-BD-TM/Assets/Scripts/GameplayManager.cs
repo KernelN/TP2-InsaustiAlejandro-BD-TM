@@ -23,6 +23,11 @@ public class GameplayManager : MonoBehaviour
     void UpdateStates()
     {
         currentTime += 1;
+        if (currentTime >= maxTime)
+        {
+            CancelInvoke("UpdateStates");
+            return;
+        }
         OneSecondPassed?.Invoke();
     }
 }

@@ -5,11 +5,12 @@ using Random = UnityEngine.Random;
 
 public class TileManager : MonoBehaviour
 {
+    public Vector2 mapSize { get { return mapSizeSetter; } }
     [SerializeField] GameObject safeTilePrefab;
     [SerializeField] GameObject tilePrefab;
     [SerializeField] Transform tilesEmpty;
     [SerializeField] GameplayManager gameManager;
-    [SerializeField] Vector2 mapSize;
+    [SerializeField] Vector2 mapSizeSetter;
     [SerializeField] int tileDisappearCooldown;
     List<TileController> tiles;
     Action UpdateTiles;
@@ -53,7 +54,6 @@ public class TileManager : MonoBehaviour
         UpdateTiles += tile.OnStateUpdate;
         tiles.Add(tile);
     }
-
     void OnSecondPassed()
     {
         UpdateTiles.Invoke();
@@ -62,7 +62,6 @@ public class TileManager : MonoBehaviour
             SelectTilesToDisappear();
         }
     }
-
     void SelectTilesToDisappear()
     {
         float tilesPercentage = (float)gameManager.currentTime / (float)gameManager.maxTime;
@@ -75,5 +74,13 @@ public class TileManager : MonoBehaviour
             } while (tiles[randomTileIndex].currentState != TileController.State.SOLID);
             tiles[randomTileIndex].StartDisappear();
         }
+    }
+    public Vector2 GetMapBorders()
+    {
+        Vector2 borders = mapSize;
+        Transform lastTile = tiles[tiles.Count - 1].transform;
+        borders.x = lastTile.position.x + lastTile.localScale.x / 2;  
+        borders.y = lastTile.position.y + lastTile.localScale.y / 2;  
+        return borders;
     }
 }
