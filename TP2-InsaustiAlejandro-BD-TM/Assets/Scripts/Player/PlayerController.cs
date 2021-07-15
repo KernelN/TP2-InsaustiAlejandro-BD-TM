@@ -1,8 +1,11 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
+    public Action playerDied;
+    public Action scoreChanged;
     [SerializeField] TileManager tileManager;
     [SerializeField] int maxHealth;
     [SerializeField] float speed;
@@ -50,7 +53,8 @@ public class PlayerController : MonoBehaviour
         {
             data.health = maxHealth;
             data.deaths++;
-            data.score /= 2; 
+            data.score /= 2;
+            scoreChanged?.Invoke();
         }
         if (playerFell)
         {
@@ -58,6 +62,7 @@ public class PlayerController : MonoBehaviour
             GetComponent<BoxCollider2D>().enabled = false;
             Invoke("ReactivateCollider", 0.5f);
         }
+        playerDied?.Invoke();
     }
     void ReactivateCollider()
     {
@@ -66,5 +71,6 @@ public class PlayerController : MonoBehaviour
     public void IncreaseScore(int scoreIncrease)
     {
         data.score += scoreIncrease;
+        scoreChanged?.Invoke();
     }
 }

@@ -321,7 +321,7 @@ GameObject:
   - component: {fileID: 178912112}
   - component: {fileID: 178912111}
   m_Layer: 5
-  m_Name: NumberDeaths - Text (TMP)
+  m_Name: DeathsNumber - Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -366,7 +366,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 000
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -1773,7 +1773,7 @@ GameObject:
   - component: {fileID: 861510926}
   - component: {fileID: 861510925}
   m_Layer: 5
-  m_Name: Points - Text (TMP)
+  m_Name: ScoreNumber - Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1818,7 +1818,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 000
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -2598,11 +2598,12 @@ MonoBehaviour:
   signPanel: {fileID: 857861096}
   sqlConnector: {fileID: 1673171511}
   hidePanelTime: 1
-  inGameUI: {fileID: 0}
-  time: {fileID: 0}
-  score: {fileID: 0}
-  deaths: {fileID: 0}
-  gameplayManager: {fileID: 0}
+  inGameUI: {fileID: 948511002}
+  time: {fileID: 883895530}
+  score: {fileID: 861510925}
+  deaths: {fileID: 178912111}
+  gameplayManager: {fileID: 868002163}
+  player: {fileID: 1832525883}
 --- !u!1 &1453632404
 GameObject:
   m_ObjectHideFlags: 0
@@ -3513,10 +3514,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9213a4ac23c97428def639ab4fe6bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData:
+    score: 0
+    health: 0
+    deaths: 0
   signSuccessful: 0
   usernameField: {fileID: 2138243479}
   passwordField: {fileID: 1796493735}
-  playerController: {fileID: 0}
 --- !u!4 &1673171512
 Transform:
   m_ObjectHideFlags: 0

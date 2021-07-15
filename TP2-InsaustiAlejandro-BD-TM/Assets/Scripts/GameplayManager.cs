@@ -5,7 +5,8 @@ public class GameplayManager : MonoBehaviour
 {
     public int currentTime { get; private set; }
     public int maxTime { get { return maxTimeSetterInSeconds; } }
-    public Action OneSecondPassed;
+    public Action gameStarted;
+    public Action oneSecondPassed;
     [SerializeField] SQLConnection sqlConnector;
     [SerializeField] int maxTimeSetterInSeconds;
     //bool inGame;
@@ -17,6 +18,7 @@ public class GameplayManager : MonoBehaviour
     public void Play()
     {
         //inGame = true;
+        gameStarted?.Invoke();
         InvokeRepeating("UpdateStates", 0, 1);
     }
 
@@ -28,6 +30,6 @@ public class GameplayManager : MonoBehaviour
             CancelInvoke("UpdateStates");
             return;
         }
-        OneSecondPassed?.Invoke();
+        oneSecondPassed?.Invoke();
     }
 }

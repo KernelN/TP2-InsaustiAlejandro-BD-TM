@@ -21,7 +21,7 @@ public class CoinManager : MonoBehaviour
         {
             GenerateCoin();
         }
-        gameManager.OneSecondPassed += OnSecondPassed;
+        gameManager.oneSecondPassed += OnSecondPassed;
     }
 
     void GenerateCoin()

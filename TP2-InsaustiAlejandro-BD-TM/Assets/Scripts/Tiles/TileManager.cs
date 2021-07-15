@@ -26,7 +26,7 @@ public class TileManager : MonoBehaviour
                 GenerateTile(i, j);
             }
         }
-        gameManager.OneSecondPassed += OnSecondPassed;
+        gameManager.oneSecondPassed += OnSecondPassed;
     }
 
     void GenerateTile(float i, float j)

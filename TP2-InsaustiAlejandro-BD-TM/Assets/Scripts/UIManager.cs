@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TMPro.TextMeshProUGUI score;
     [SerializeField] TMPro.TextMeshProUGUI deaths;
     [SerializeField] GameplayManager gameplayManager;
+    [SerializeField] PlayerController player;
 
     private void Start()
     {
@@ -30,10 +31,13 @@ public class UIManager : MonoBehaviour
         sqlConnector.newUserDetected += onNewUserDetected;
         sqlConnector.newUserRegistered += onNewUserRegistration;
         sqlConnector.signedIn += onSuccesfulSignIn;
-        //gameplayManager.gameStarted += onNewUserRegistration;
-        //gameplayManager.oneSecondPassed += onNewUserRegistration;
+        gameplayManager.gameStarted += onGameStart;
+        gameplayManager.oneSecondPassed += onSecondPass;
+        player.scoreChanged += onScoreUpdate;
+        player.playerDied += onDeathsCounterUpdate;
     }
 
+    //SQL
     void onUserNameError()
     {
         usernameError.SetActive(true);
@@ -64,5 +68,24 @@ public class UIManager : MonoBehaviour
         } while (hidePanelTimer <= hidePanelTime);
         hidePanelTimer = 0;
         signPanel.gameObject.SetActive(false);
+    }
+    //InGame
+    void onGameStart()
+    {
+        inGameUI.SetActive(true);
+    }
+    void onSecondPass()
+    {
+        int minutesPassed = gameplayManager.currentTime / 60;
+        int secondsPassed = gameplayManager.currentTime % 60;
+        time.text = minutesPassed.ToString("00") + ":" + secondsPassed.ToString("00");
+    }
+    void onScoreUpdate()
+    {
+        score.text = player.data.score.ToString();
+    }
+    void onDeathsCounterUpdate()
+    {
+        deaths.text = player.data.deaths.ToString();
     }
 }
