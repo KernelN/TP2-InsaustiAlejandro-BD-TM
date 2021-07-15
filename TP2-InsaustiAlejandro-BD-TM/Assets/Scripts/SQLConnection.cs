@@ -5,29 +5,24 @@ using UnityEngine.Networking;
 
 public class SQLConnection : MonoBehaviour
 {
+    public Action usernameErrorDetected;
+    public Action passwordErrorDetected;
+    public Action newUserDetected;
+    public Action newUserRegistered;
     public Action signedIn;
+    public PlayerData playerData;
     public bool signSuccessful;
     [SerializeField] TMPro.TMP_InputField usernameField;
     [SerializeField] TMPro.TMP_InputField passwordField;
-    [SerializeField] GameObject usernameError;
-    [SerializeField] GameObject passwordError;
-    [SerializeField] GameObject registerPanel;
-    [SerializeField] RectTransform signPanel;
-    [SerializeField] PlayerController playerController;
-    [SerializeField] float hidePanelTime;
     const string dataBasePath = "http://localhost/tp2-insaustialejandro-bd-tm/";
     const string nameUnexistantError = "3: Name Unexistant";
     const string SQLEmpty = " ";
     const string inputEmpty = "";
-    Vector3 originalSignPanelPos;
-    float hidePanelTimer;
     string playerName;
     string playerPassword;
     private void Start()
     {
         signSuccessful = false;
-        hidePanelTimer = 0;
-        originalSignPanelPos = signPanel.anchoredPosition;
     }
     public void CallSign()
     {
@@ -36,7 +31,7 @@ public class SQLConnection : MonoBehaviour
     public void CallRegister()
     {
         StartCoroutine(RegisterUser());
-        registerPanel.SetActive(false);
+        newUserRegistered?.Invoke();
     }
 
     //SQL Sign funcs
@@ -45,7 +40,7 @@ public class SQLConnection : MonoBehaviour
         //check if user entered a username
         if (usernameField.text == inputEmpty)
         {
-            usernameError.SetActive(true);
+            usernameErrorDetected?.Invoke();
             yield break;
         }
 
@@ -55,24 +50,24 @@ public class SQLConnection : MonoBehaviour
         //check if user exists
         if (playerName == nameUnexistantError) //if not, register to database
         {
-            registerPanel.SetActive(true);
+            newUserDetected?.Invoke();
             yield break;
         }
         if (playerPassword == passwordField.text + SQLEmpty) //if pass was right, just save data
         {
-            StartCoroutine(FinishSign());
+            FinishSign();
             yield break;
         }
 
         if (playerPassword != SQLEmpty) //if had a different pass, throw error
         {
-            passwordError.SetActive(true);
+            passwordErrorDetected?.Invoke();
             yield break;
         }
         else //if didn't have pass, update and add one to database
         {
             StartCoroutine(UpdateUser());
-            StartCoroutine(FinishSign());
+            FinishSign();
             yield break;
         }
     }
@@ -97,7 +92,7 @@ public class SQLConnection : MonoBehaviour
         if (www.result == UnityWebRequest.Result.Success)
         {
             Debug.Log("Data loaded to the sql database succesfully!");
-            StartCoroutine(FinishSign());
+            FinishSign();
         }
         else
         {
@@ -145,22 +140,14 @@ public class SQLConnection : MonoBehaviour
         }
     }
     //Unity Sign funcs
-    IEnumerator FinishSign()
+    void FinishSign()
     {
         signSuccessful = true;
-        do
-        {
-            signPanel.anchoredPosition = Vector3.Lerp(originalSignPanelPos, -originalSignPanelPos, hidePanelTimer / hidePanelTime);
-            hidePanelTimer += Time.deltaTime;
-            yield return null;
-        } while (hidePanelTimer <= hidePanelTime);
-        hidePanelTimer = 0;
-        signPanel.gameObject.SetActive(false);
         signedIn?.Invoke();
     }
 
     //SQL InGame funcs
-    IEnumerator UpdateUserGame(PlayerData playerData)
+    IEnumerator UpdateUserGame()
     {
         WWWForm form = new WWWForm();
         form.AddField("username", playerName);
@@ -180,6 +167,6 @@ public class SQLConnection : MonoBehaviour
     //Unity InGameFuncs
     public void SavePlayerDataToDatabase()
     {
-        StartCoroutine(UpdateUserGame(playerController.data));
+        StartCoroutine(UpdateUserGame());
     }
 }
