@@ -2878,7 +2878,7 @@ MonoBehaviour:
     type: 3}
   tilesEmpty: {fileID: 3607446}
   gameManager: {fileID: 868002163}
-  mapSizeSetter: {x: 9, y: 9}
+  mapSizeSetter: {x: 7, y: 7}
   tileDisappearCooldown: 3
 --- !u!4 &973107281
 Transform:
