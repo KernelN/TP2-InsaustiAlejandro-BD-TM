@@ -99,6 +99,7 @@ public class SQLConnection : MonoBehaviour
         if (www.result == UnityWebRequest.Result.Success)
         {
             Debug.Log("Data loaded to the sql database succesfully!");
+            FinishSign();
         }
         else
         {

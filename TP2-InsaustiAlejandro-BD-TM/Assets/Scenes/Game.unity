@@ -3309,6 +3309,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1389610117}
+  - component: {fileID: 1389610119}
   - component: {fileID: 1389610118}
   m_Layer: 0
   m_Name: UI Manager
@@ -3340,7 +3341,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1389610116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 146be7b4f25ab47479f687e7c0cfee29, type: 3}
+  m_Script: {fileID: 11500000, guid: e5939ed0ce621f644b2afa77ee3375eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   usernameError: {fileID: 1623703377}
@@ -3350,6 +3351,18 @@ MonoBehaviour:
   signPanel: {fileID: 857861096}
   sqlConnector: {fileID: 1673171511}
   hidePanelTime: 1
+--- !u!114 &1389610119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389610116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 624f68d0a343c404d8a50bde25b7a1ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   inGameUI: {fileID: 948511002}
   gameOver: {fileID: 2016990678}
   time: {fileID: 883895530}
